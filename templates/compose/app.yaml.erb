@@ -27,6 +27,20 @@ services:
       - ../config/barong/authz_rules.yml:/home/app/config/authz_rules.yml
       - ../config/barong/management_api.yml:/home/app/config/management_api.yml
 
+  finex-api:
+    restart: always
+    image: "<%= @utils['images']['finex'] %>"
+    command: "./orderapi"
+    volumes:
+      - ../config/finex:/app/config:ro
+
+  finex-engine:
+    restart: always
+    image: "<%= @utils['images']['finex'] %>"
+    command: "./finex"
+    volumes:
+      - ../config/finex:/app/config:ro
+
   arke:
     image: "<%= @utils['images']['arke'] %>"
     env_file:

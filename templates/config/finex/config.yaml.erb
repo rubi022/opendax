@@ -1,0 +1,23 @@
+database:
+  driver: mysql
+  name: peatio_production
+  pool: 5
+  username: root
+  password: changeme
+  host: db
+  port: 3306
+messaging:
+  driver: amqp
+  username: guest
+  password: guest
+  host: rabbitmq
+  port: 5672
+  exchanges:
+    - name: finex.orderapi
+      type: direct
+      durable: false
+    - name: peatio.events.ranger
+      type: topic
+      durable: false
+  queues:
+    - name: finex.gateway
